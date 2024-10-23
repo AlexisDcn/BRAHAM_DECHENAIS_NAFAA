@@ -18,6 +18,25 @@ const int coupFort   = 100;
 boolean estVerrouille = false;
 int     nombreDeCoups = 0;
 
+boolean verifierCoup(int intensite) {
+  if (intensite > coupFaible && intensite < coupFort) {
+    digitalWrite(brocheLEDJaune, HIGH);
+    delay(50);
+    digitalWrite(brocheLEDJaune, LOW);
+
+    Serial.print("Coup VALIDE, d'intensité ");
+    Serial.println(intensite);
+
+    return true;
+  } else {
+    Serial.print("Coup INVALIDE, d'intensité ");
+    Serial.println(intensite);
+
+    return false;
+  }
+}
+
+
 void setup() {
   monServo.attach(9);
 
@@ -77,20 +96,3 @@ void loop() {
   }
 }
 
-boolean verifierCoup(int intensite) {
-  if (intensite > coupFaible && intensite < coupFort) {
-    digitalWrite(brocheLEDJaune, HIGH);
-    delay(50);
-    digitalWrite(brocheLEDJaune, LOW);
-
-    Serial.print("Coup VALIDE, d'intensité ");
-    Serial.println(intensite);
-
-    return true;
-  } else {
-    Serial.print("Coup INVALIDE, d'intensité ");
-    Serial.println(intensite);
-
-    return false;
-  }
-}
