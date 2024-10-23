@@ -3,23 +3,25 @@
 
 Servo monServo;
 
-const int brochePiezo        = A0;
+const int brochePiezo = A0;
 const int brocheInterrupteur = 2;
-const int brocheLEDJaune     = 3;
-const int brocheLEDVerte     = 4;
-const int brocheLEDRouge     = 5;
+const int brocheLEDJaune = 3;
+const int brocheLEDVerte = 4;
+const int brocheLEDRouge = 5;
 
 int etatInterrupteur;
 int intensiteCoup;
 
 const int coupFaible = 10;
-const int coupFort   = 100;
+const int coupFort = 100;
 
 bool estVerrouille = false;
-int     nombreDeCoups = 0;
+int nombreDeCoups = 0;
 
-bool verifierCoup(int intensite) {
-  if (intensite > coupFaible && intensite < coupFort) {
+bool verifierCoup(int intensite)
+{
+  if (intensite > coupFaible && intensite < coupFort)
+  {
     digitalWrite(brocheLEDJaune, HIGH);
     delay(50);
     digitalWrite(brocheLEDJaune, LOW);
@@ -28,7 +30,9 @@ bool verifierCoup(int intensite) {
     Serial.println(intensite);
 
     return true;
-  } else {
+  }
+  else
+  {
     Serial.print("Coup INVALIDE, d'intensité ");
     Serial.println(intensite);
 
@@ -36,8 +40,8 @@ bool verifierCoup(int intensite) {
   }
 }
 
-
-void setup() {
+void setup()
+{
   monServo.attach(9);
 
   pinMode(brocheLEDJaune, OUTPUT);
@@ -53,11 +57,14 @@ void setup() {
   Serial.println("La boite est déverrouillée!");
 }
 
-void loop() {
-  if (estVerrouille == false) {
+void loop()
+{
+  if (estVerrouille == false)
+  {
     etatInterrupteur = digitalRead(brocheInterrupteur);
 
-    if (etatInterrupteur == HIGH) {
+    if (etatInterrupteur == HIGH)
+    {
       estVerrouille = true;
       nombreDeCoups = 0;
 
@@ -70,11 +77,14 @@ void loop() {
     }
   }
 
-  if (estVerrouille == true) {
+  if (estVerrouille == true)
+  {
     intensiteCoup = analogRead(brochePiezo);
 
-    if (nombreDeCoups < 3 && intensiteCoup > 0) {
-      if (verifierCoup(intensiteCoup) == true) {
+    if (nombreDeCoups < 3 && intensiteCoup > 0)
+    {
+      if (verifierCoup(intensiteCoup) == true)
+      {
         nombreDeCoups++;
       }
 
@@ -82,7 +92,8 @@ void loop() {
       Serial.println(" supplémentaire(s) à donner");
     }
 
-    if (nombreDeCoups >= 3) {
+    if (nombreDeCoups >= 3)
+    {
       estVerrouille = false;
 
       monServo.write(0);
@@ -95,4 +106,3 @@ void loop() {
     }
   }
 }
-
