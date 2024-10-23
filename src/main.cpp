@@ -14,10 +14,7 @@ const int coupFaible= 10;
 const int coupFort= 100;
 
 boolean estVerrouille= false;
-int nombreDeCoups= 0;
-
-// Function prototype
-boolean verifierCoup(int intensite);
+int nombreDeCoups= 0; 
 
 void setup() {
   monServo.attach(9);
