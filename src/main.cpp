@@ -13,8 +13,9 @@ int intensiteCoup;
 const int coupFaible= 10;
 const int coupFort= 100;
 
-boolean estVerrouille= false;
+bool estVerrouille= false;
 int nombreDeCoups= 0; 
+boolean verifierCoup(int intensite);
 
 void setup() {
   monServo.attach(9);
