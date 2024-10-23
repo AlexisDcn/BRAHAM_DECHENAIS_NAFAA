@@ -15,10 +15,10 @@ int intensiteCoup;
 const int coupFaible = 10;
 const int coupFort = 100;
 
-bool estVerrouille = false;
+boolean estVerrouille = false;
 int nombreDeCoups = 0;
 
-bool verifierCoup(int intensite)
+boolean verifierCoup(int intensite)
 {
   if (intensite > coupFaible && intensite < coupFort)
   {
